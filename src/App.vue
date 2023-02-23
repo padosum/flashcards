@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const drawer = ref(false);
+</script>
+
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer"> </v-navigation-drawer>
@@ -13,6 +19,4 @@
   </v-app>
 </template>
 
-<script setup lang="ts">
-const drawer = ref(false);
-</script>
+<style scoped></style>
