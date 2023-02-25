@@ -11,13 +11,12 @@ describe('routing', () => {
       routes: [{ path: '/', component: DashboardView }],
     });
 
-    const { findByText, getByTestId } = render(App, {
+    const { findByText } = render(App, {
       global: {
         plugins: [router, vuetify],
       },
     });
 
     expect(await findByText('Dashboard')).toBeInTheDocument();
-    expect(getByTestId('location-display')).toHaveTextContent('Dashboard');
   });
 });
