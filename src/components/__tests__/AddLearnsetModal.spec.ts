@@ -41,4 +41,25 @@ describe('AddLearnsetModal Component', () => {
     await fireEvent.click(getByTestId('close'));
     expect(queryByText(title)).not.toBeInTheDocument();
   });
+
+  it(`modal의 '추가' 버튼을 클릭하면 클릭 이벤트가 발생되고 modal이 닫힌다.`, async () => {
+    const { queryByText, getByTestId, getByRole, emitted } = render(
+      AddLearnsetModal,
+      {
+        global: {
+          plugins: [vuetify],
+        },
+        props: {
+          title,
+          learnsetTitle,
+        },
+      }
+    );
+
+    await fireEvent.click(getByRole('button'));
+
+    await fireEvent.click(getByTestId('save'));
+    expect(emitted()).toHaveProperty('click');
+    expect(queryByText(title)).not.toBeInTheDocument();
+  });
 });
