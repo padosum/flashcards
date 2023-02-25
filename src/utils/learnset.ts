@@ -1,6 +1,6 @@
 import type Token from 'markdown-it/lib/token';
 import type { Card } from '@/types/interfaces';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 
 const CARD_INITIAL_VALUE: Card = {
   id: '',

@@ -8,7 +8,7 @@ interface File {
 interface Learnset {
   id: string;
   name: string;
-  created: string;
+  created: number;
   cards: Card[];
 }
 
