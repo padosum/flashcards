@@ -10,7 +10,7 @@ describe('learnset: getLearnsetFromTokens', () => {
     ],
     responses: [
       `\n\n- 반갑습니다\n- 하하하하\n\n\n`,
-      `n\n상태관리를 위한 라이브러리다.\n`,
+      `\n\n상태관리를 위한 라이브러리다.\n`,
     ],
   };
 
