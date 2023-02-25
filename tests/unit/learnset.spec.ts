@@ -1,4 +1,4 @@
-import { getLearnsetFromTokens } from '../learnset';
+import { getLearnsetFromTokens } from '@/utils/learnset';
 import markdownit from 'markdown-it';
 
 describe('learnset: getLearnsetFromTokens', () => {
