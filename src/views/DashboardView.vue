@@ -1,12 +1,13 @@
 <template>
-  <span data-testid="location-display">Dashboard</span>
-  <div class="d-flex flex-column">
-    <BaseButton text="카드 뭉치 추가하기" @click="importLearnset" />
-    <AddLearnsetModal
-      :learnset-title="mdFile.name"
-      title="카드 뭉치 추가하기"
-      ref="modal"
-    />
+  <div class="d-flex">
+    <div class="pa-10">
+      <BaseButton text="카드 뭉치 추가하기" @click="importLearnset" />
+      <AddLearnsetModal
+        :learnset-title="mdFile.name"
+        title="카드 뭉치 추가하기"
+        ref="modal"
+      />
+    </div>
   </div>
 </template>
 
