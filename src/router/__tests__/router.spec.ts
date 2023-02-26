@@ -1,4 +1,4 @@
-import { render } from '@testing-library/vue';
+import { render, waitFor } from '@testing-library/vue';
 import App from '@/App.vue';
 import DashboardView from '@/views/DashboardView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -12,12 +12,14 @@ describe('routing', () => {
       routes: [{ path: '/', component: DashboardView, name }],
     });
 
-    const { findByText } = render(App, {
+    const { getByTestId } = render(App, {
       global: {
         plugins: [router, vuetify],
       },
     });
 
-    expect(await findByText(name)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(getByTestId('toolbar-title')).toHaveTextContent('Dashboard');
+    });
   });
 });
