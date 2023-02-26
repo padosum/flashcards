@@ -1,13 +1,21 @@
 import { mutations } from '../mutations';
 
 describe('SET_LEARNSETS', () => {
-  it(`add learnsets to the state`, () => {
-    const learnsets = {
-      cards: [],
-      created: 1677390326088,
-      id: 'dd9c893f-277a-4c22-bcb3-4755ad58a2a2',
-      name: 'test',
-    };
+  it(`set learnsets to the state`, () => {
+    const learnsets = [
+      {
+        id: '',
+        name: '',
+        created: 0,
+        cards: [],
+      },
+      {
+        id: '',
+        name: '',
+        created: 0,
+        cards: [],
+      },
+    ];
 
     const state = {
       learnsets: [],
@@ -15,6 +23,25 @@ describe('SET_LEARNSETS', () => {
 
     mutations.SET_LEARNSETS(state, learnsets);
 
-    expect(state).toEqual({ learnsets: [learnsets] });
+    expect(state).toEqual({ learnsets });
+  });
+});
+
+describe('ADD_LEARNSET', () => {
+  it(`add learnset to the state`, () => {
+    const learnset = {
+      id: '',
+      name: '',
+      created: 0,
+      cards: [],
+    };
+
+    const state = {
+      learnsets: [],
+    };
+
+    mutations.ADD_LEARNSETS(state, learnset);
+
+    expect(state).toEqual({ learnsets: [learnset] });
   });
 });
