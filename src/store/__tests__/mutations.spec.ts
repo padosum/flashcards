@@ -1,4 +1,4 @@
-import mutations from '../mutations';
+import { mutations } from '../mutations';
 
 describe('SET_LEARNSETS', () => {
   it(`add learnsets to the state`, () => {
