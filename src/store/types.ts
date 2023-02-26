@@ -1,5 +1,6 @@
 import type { CommitOptions, Store } from 'vuex';
 import type { Mutations } from './mutations';
+import type { Getters } from './getters';
 import type { RootState } from './state';
 
 type MyMutations = {
@@ -10,4 +11,12 @@ type MyMutations = {
   ): ReturnType<Mutations[K]>;
 };
 
-export type MyStore = Omit<Store<RootState>, 'commit'> & MyMutations;
+type MyGetters = {
+  getters: {
+    [K in keyof Getters]: ReturnType<Getters[K]>;
+  };
+};
+
+export type MyStore = Omit<Store<RootState>, 'getters' | 'commit'> &
+  MyMutations &
+  MyGetters;
