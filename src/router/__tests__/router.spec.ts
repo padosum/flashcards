@@ -8,12 +8,18 @@ import { createStore, type StoreOptions } from 'vuex';
 import { store } from '@/store';
 import type { Learnset } from '@/types/interfaces';
 import LearnsetView from '@/views/LearnsetView.vue';
+import LearnView from '@/views/LearnView.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: DashboardView, name: 'Dashboard' },
     { path: '/learnset/:id', component: LearnsetView, name: 'LearnsetView' },
+    {
+      path: '/learn/:id',
+      component: LearnView,
+      name: 'Learn',
+    },
   ],
 });
 
