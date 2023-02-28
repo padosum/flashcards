@@ -30,36 +30,17 @@
         정답과 유사한 정도에 따라 점수를 매기세요.
       </p>
       <div class="d-flex flex-wrap justify-space-around btn-wrapper">
-        <BaseButton text="5" :size="size" :disabled="submitted" @click="submit">
+        <BaseButton
+          v-for="score in SCORES"
+          :key="score.score"
+          :text="score.score"
+          :size="size"
+          :disabled="submitted"
+          @click="submit"
+        >
           <v-tooltip activator="parent" location="bottom" :disabled="submitted">
-            완벽한 응답
+            {{ score.tooltip }}
           </v-tooltip>
-        </BaseButton>
-        <BaseButton text="4" :size="size" :disabled="submitted" @click="submit">
-          <v-tooltip activator="parent" location="bottom" :disabled="submitted"
-            >망설임 끝에 올바른 응답</v-tooltip
-          >
-        </BaseButton>
-        <BaseButton text="3" :size="size" :disabled="submitted" @click="submit">
-          <v-tooltip activator="parent" location="bottom" :disabled="submitted"
-            >올바른 응답이지만 기억해 내기 어려움</v-tooltip
-          >
-        </BaseButton>
-
-        <BaseButton text="2" :size="size" :disabled="submitted" @click="submit">
-          <v-tooltip activator="parent" location="bottom" :disabled="submitted"
-            >잘못된 응답, 정답을 쉽게 기억할 수는 있음</v-tooltip
-          >
-        </BaseButton>
-        <BaseButton text="1" :size="size" :disabled="submitted" @click="submit">
-          <v-tooltip activator="parent" location="bottom" :disabled="submitted"
-            >잘못된 응답, 올바른 응답을 기억함</v-tooltip
-          >
-        </BaseButton>
-        <BaseButton text="0" :size="size" :disabled="submitted" @click="submit">
-          <v-tooltip activator="parent" location="bottom" :disabled="submitted"
-            >전혀 기억이 안남</v-tooltip
-          >
         </BaseButton>
       </div>
     </div>
@@ -73,6 +54,8 @@ import { ref, computed, type PropType } from 'vue';
 import type { Card } from '@/types/interfaces';
 import { useDisplay } from 'vuetify';
 import { useMarkdownIt } from '@/plugins/markdownit';
+
+import { SCORES } from '@/constants';
 
 const showBack = ref(false);
 const submitted = ref(false);
