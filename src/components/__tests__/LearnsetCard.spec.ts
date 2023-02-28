@@ -4,6 +4,12 @@ import { fireEvent, render } from '@testing-library/vue';
 import vuetify from '@/utils/setupVuetify';
 import markdownit from 'markdown-it';
 import { markdownItPlugin } from '@/plugins/markdownit';
+import { createRouter, createWebHistory } from 'vue-router';
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [],
+});
 
 describe('LearnsetCard Component', () => {
   const md = markdownit({});
@@ -25,7 +31,7 @@ describe('LearnsetCard Component', () => {
   it('카드의 질문이 렌더링 된다.', () => {
     const { getByText } = render(LearnsetCard, {
       global: {
-        plugins: [vuetify, markdownItPlugin],
+        plugins: [router, vuetify, markdownItPlugin],
       },
       props: {
         card: CARD_DATA,
@@ -40,7 +46,7 @@ describe('LearnsetCard Component', () => {
       LearnsetCard,
       {
         global: {
-          plugins: [vuetify, markdownItPlugin],
+          plugins: [router, vuetify, markdownItPlugin],
         },
         props: {
           card: CARD_DATA,
