@@ -8,12 +8,86 @@
       value="primary"
       hide-details
     ></v-switch>
+    <v-sheet
+      elevation="12"
+      :max-width="sheetSize"
+      rounded="lg"
+      class="pa-4 text-center mx-auto"
+    >
+      <swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :modules="modules"
+        :navigation="true"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="card in cards" :key="card.id">
+          <LearnsetCard :card="card" />
+        </swiper-slide>
+      </swiper>
+    </v-sheet>
   </v-layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-cards';
+
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { EffectCards, Navigation } from 'swiper';
+
+import { ref, reactive, computed } from 'vue';
+import { useDisplay } from 'vuetify';
+import { useStore } from 'vuex';
+import type { MyStore } from '@/store/types';
+
+import { useRoute } from 'vue-router';
+
+import LearnsetCard from '@/components/LearnsetCard.vue';
+
+const modules = [EffectCards, Navigation];
+
 const showReviewCards = ref(false);
+
+const route = useRoute();
+const store: MyStore = useStore();
+const {
+  params: { id },
+} = route;
+
+const [learnset] = store.getters.learnset(id as string);
+const { cards } = reactive(learnset);
+
+const { name } = useDisplay();
+
+const sheetSize = computed(() => {
+  switch (name.value) {
+    case 'xs':
+    case 'sm':
+      return '80%';
+    default:
+      return '50%';
+  }
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+h2 {
+  font-size: 24px;
+  color: #242424;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.swiper-slide {
+  background-color: #d1c4e9;
+}
+</style>
