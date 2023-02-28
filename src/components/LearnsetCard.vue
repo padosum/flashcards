@@ -11,13 +11,12 @@
       rows="2"
     ></v-textarea>
     <div class="d-flex justify-center" v-if="!showBack">
-      <v-btn
+      <BaseButton
+        text="정답 확인하기"
         variant="outlined"
         data-testid="show-answer-btn"
         @click="showBack = !showBack"
-      >
-        정답 확인하기
-      </v-btn>
+      />
     </div>
     <div class="d-flex flex-column pa-3" v-else>
       <v-card variant="outlined">
@@ -31,86 +30,45 @@
         정답과 유사한 정도에 따라 점수를 매기세요.
       </p>
       <div class="d-flex flex-wrap justify-space-around btn-wrapper">
-        <v-btn
-          variant="outlined"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          5
-          <v-tooltip
-            activator="parent"
-            :size="size"
-            location="bottom"
-            :disabled="submitted"
-          >
+        <BaseButton text="5" :size="size" :disabled="submitted" @click="submit">
+          <v-tooltip activator="parent" location="bottom" :disabled="submitted">
             완벽한 응답
           </v-tooltip>
-        </v-btn>
-
-        <v-btn
-          variant="outlined"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          4
+        </BaseButton>
+        <BaseButton text="4" :size="size" :disabled="submitted" @click="submit">
           <v-tooltip activator="parent" location="bottom" :disabled="submitted"
             >망설임 끝에 올바른 응답</v-tooltip
           >
-        </v-btn>
-
-        <v-btn
-          variant="outlined"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          3
+        </BaseButton>
+        <BaseButton text="3" :size="size" :disabled="submitted" @click="submit">
           <v-tooltip activator="parent" location="bottom" :disabled="submitted"
             >올바른 응답이지만 기억해 내기 어려움</v-tooltip
           >
-        </v-btn>
+        </BaseButton>
 
-        <v-btn
-          variant="outlined"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          2
+        <BaseButton text="2" :size="size" :disabled="submitted" @click="submit">
           <v-tooltip activator="parent" location="bottom" :disabled="submitted"
             >잘못된 응답, 정답을 쉽게 기억할 수는 있음</v-tooltip
           >
-        </v-btn>
-        <v-btn
-          variant="outlined"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          1
+        </BaseButton>
+        <BaseButton text="1" :size="size" :disabled="submitted" @click="submit">
           <v-tooltip activator="parent" location="bottom" :disabled="submitted"
             >잘못된 응답, 올바른 응답을 기억함</v-tooltip
           >
-        </v-btn>
-        <v-btn
-          variant="outlined"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          0
+        </BaseButton>
+        <BaseButton text="0" :size="size" :disabled="submitted" @click="submit">
           <v-tooltip activator="parent" location="bottom" :disabled="submitted"
             >전혀 기억이 안남</v-tooltip
           >
-        </v-btn>
+        </BaseButton>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseButton from './BaseButton.vue';
+
 import { ref, computed, type PropType } from 'vue';
 import type { Card } from '@/types/interfaces';
 import { useDisplay } from 'vuetify';
