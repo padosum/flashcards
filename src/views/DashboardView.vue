@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import markdownit from 'markdown-it';
 import fileDialog from 'file-dialog';
 
 import BaseButton from '@/components/BaseButton.vue';
@@ -24,7 +23,11 @@ import type { File } from '@/types/interfaces';
 import { getLearnsetFromTokens } from '@/utils/learnset';
 import { useStore } from 'vuex';
 import { MutationTypes } from '@/store/mutations';
+import { useMarkdownIt } from '@/plugins/markdownit';
+
 const store = useStore();
+
+const md = useMarkdownIt();
 
 const mdFile: File = reactive({
   name: '',
@@ -58,7 +61,6 @@ const openDialog = async (): Promise<File> => {
 };
 
 const addLearnset = (name: string) => {
-  const md = markdownit({});
   const tokens = md.parse(mdFile.contents as string, {});
   const { cards, id, created } = getLearnsetFromTokens(tokens);
 

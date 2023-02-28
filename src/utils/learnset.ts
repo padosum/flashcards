@@ -25,7 +25,11 @@ const getLearnsetFromTokens = (tokens: Token[]) => {
 
     if (type === 'heading_open' && tag === 'h2' && !front) {
       card.title = card.front[1].content;
-      cards.push({ ...card, id: uuid() });
+
+      if (card.back.length) {
+        cards.push({ ...card, id: uuid() });
+      }
+
       front = true;
 
       card['front'] = [];
@@ -37,6 +41,11 @@ const getLearnsetFromTokens = (tokens: Token[]) => {
     if (type === 'heading_close' && tag === 'h2') {
       front = false;
     }
+  }
+
+  if (card.back.length > 0) {
+    card.title = card.front[1].content;
+    cards.push({ ...card, id: uuid() });
   }
 
   const id = uuid();

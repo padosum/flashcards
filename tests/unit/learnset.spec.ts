@@ -17,7 +17,7 @@ describe('learnset: getLearnsetFromTokens', () => {
   const { questions, responses } = FILE_DATA;
   const md = markdownit({});
   const tokens = md.parse(
-    `${questions[0]}${responses[0]}${questions[1]}${responses[1]}${questions[2]}`,
+    `${questions[0]}${responses[0]}${questions[2]}${questions[1]}${responses[1]}`,
     {}
   );
 
