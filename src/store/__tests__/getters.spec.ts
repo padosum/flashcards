@@ -69,12 +69,10 @@ describe('getters', () => {
 
     const state = { learnsets };
 
-    const [learnset] = getters.learnset(state)('1');
-
-    const BASE_DATE = new Date('2023-02-27').getTime();
-    const actual = getters.reviewCards(state, learnset)(BASE_DATE);
+    const baseDate = new Date('2023-02-27').getTime();
+    const actual = getters.reviewCards(state)({ id: '1', baseDate });
     const reviewCards = learnsets[0];
     reviewCards.cards = [CARD1];
-    expect(actual).toEqual(reviewCards);
+    expect(actual).toEqual([reviewCards]);
   });
 });
