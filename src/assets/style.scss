@@ -1,7 +1,13 @@
 @import 'highlight.js/scss/base16/atelier-sulphurpool-light.scss';
+@import 'github-markdown-css/github-markdown.css';
 
 :root {
   --swiper-navigation-sides-offset: -60px;
   --swiper-navigation-size: 32px; /* To edit the size of the arrows */
   --swiper-navigation-color: #4527a0; /* To edit the color of the arrows */
+}
+
+.markdown-body {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0);
 }

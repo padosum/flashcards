@@ -23,7 +23,7 @@
       <v-card variant="outlined">
         <v-card-title class="font-weight-bold">정답</v-card-title>
         <v-card-text class="text-left">
-          <p v-html="backHtml" class="rounded-pill"></p>
+          <p v-html="backHtml" class="rounded-pill markdown-body"></p>
         </v-card-text>
       </v-card>
 
