@@ -6,7 +6,6 @@ export const getters = {
     (state: RootState) =>
     (id: string): Learnset[] => {
       const items = state.learnsets.filter((learnset) => learnset.id === id);
-      console.log(`item`, items);
       return items;
     },
   reviewCards:
