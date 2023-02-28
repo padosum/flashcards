@@ -46,7 +46,8 @@ describe('LearnsetCard Component', () => {
         },
         data() {
           return {
-            submitted: true,
+            showBack: false,
+            submitted: false,
           };
         },
       }
