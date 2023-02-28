@@ -1,6 +1,7 @@
 <template>
-  <v-btn variant="outlined" role="button">
+  <v-btn role="button" variant="outlined">
     {{ text }}
+    <slot></slot>
   </v-btn>
 </template>
 

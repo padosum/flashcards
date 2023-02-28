@@ -1,6 +1,11 @@
 <template>
-  <v-btn class="d-none" @click="openModal = true" role="button"> open </v-btn>
-  <v-dialog v-model="openModal" width="70%" persistent v-if="openModal">
+  <BaseButton
+    text="open"
+    class="d-none"
+    role="button"
+    @click="openModal = true"
+  />
+  <v-dialog v-model="openModal" persistent v-if="openModal" :class="modalSize">
     <v-card>
       <v-card-title>
         <span class="text-h5">{{ title }}</span>
@@ -16,29 +21,31 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue-darken-1"
+        <BaseButton
+          text="취소"
+          color="primary"
           variant="text"
           data-testid="close"
           @click="openModal = false"
-        >
-          취소
-        </v-btn>
-        <v-btn
-          color="blue-darken-1"
+        />
+        <BaseButton
+          text="추가"
+          color="primary"
           variant="text"
           data-testid="save"
           @click="addLearnset"
-        >
-          추가
-        </v-btn>
+        />
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import BaseButton from './BaseButton.vue';
+
+import { ref, computed, watchEffect } from 'vue';
+import { useDisplay } from 'vuetify';
+
 const emit = defineEmits(['addLearnset']);
 const props = defineProps({
   title: {
@@ -62,6 +69,20 @@ const addLearnset = () => {
   openModal.value = false;
   emit('addLearnset', learnsetTitle.value);
 };
+
+const { name } = useDisplay();
+
+const modalSize = computed(() => {
+  switch (name.value) {
+    case 'xs':
+    case 'sm':
+      return 'w-100';
+    case 'md':
+      return 'w-75';
+    default:
+      return 'w-25';
+  }
+});
 
 defineExpose({
   toggleModal,
