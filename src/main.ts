@@ -5,6 +5,8 @@ import '@/assets/style.scss';
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css';
 import vuetify from '@/utils/setupVuetify';
+import { markdownItPlugin } from '@/plugins/markdownit';
+
 import { createStore } from 'vuex';
 import { store } from '@/store';
 
@@ -14,5 +16,6 @@ const app = createApp(App);
 app.use(vuexStore);
 app.use(router);
 app.use(vuetify);
+app.use(markdownItPlugin);
 
 app.mount('#app');

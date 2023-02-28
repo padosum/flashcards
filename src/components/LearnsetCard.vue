@@ -114,27 +114,7 @@
 import { ref, computed, type PropType } from 'vue';
 import type { Card } from '@/types/interfaces';
 import { useDisplay } from 'vuetify';
-
-import MarkdownIt from 'markdown-it';
-import hljs from 'highlight.js';
-
-const md: MarkdownIt = new MarkdownIt({
-  highlight(code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return `<pre><code class="hljs">${
-          hljs.highlight(code, { language: lang, ignoreIllegals: true }).value
-        }</code></pre>`;
-      } catch (__) {
-        console.log('markdownit error');
-      }
-    }
-
-    return (
-      '<pre><code class="hljs">' + md.utils.escapeHtml(code) + '</code></pre>'
-    );
-  },
-});
+import { useMarkdownIt } from '@/plugins/markdownit';
 
 const showBack = ref(false);
 const submitted = ref(false);
@@ -150,6 +130,7 @@ const prop = defineProps({
   },
 });
 
+const md = useMarkdownIt();
 const backHtml = md.renderer.render(prop.card.back, md.options, {});
 
 const { name } = useDisplay();
