@@ -26,23 +26,29 @@
         </v-card-text>
       </v-card>
 
-      <p class="mt-6 mb-2 text-body-2 text-left">
-        정답과 유사한 정도에 따라 점수를 매기세요.
-      </p>
-      <div class="d-flex flex-wrap justify-space-around btn-wrapper">
-        <BaseButton
-          v-for="score in SCORES"
-          :key="score.score"
-          :text="score.score"
-          :size="size"
-          :disabled="submitted"
-          @click="submit"
-        >
-          <v-tooltip activator="parent" location="bottom" :disabled="submitted">
-            {{ score.tooltip }}
-          </v-tooltip>
-        </BaseButton>
-      </div>
+      <template v-if="review">
+        <p class="mt-6 mb-2 text-body-2 text-left">
+          정답과 유사한 정도에 따라 점수를 매기세요.
+        </p>
+        <div class="d-flex flex-wrap justify-space-around btn-wrapper">
+          <BaseButton
+            v-for="score in SCORES"
+            :key="score.score"
+            :text="score.score"
+            :size="size"
+            :disabled="submitted"
+            @click="() => submit(Number(score.score))"
+          >
+            <v-tooltip
+              activator="parent"
+              location="bottom"
+              :disabled="submitted"
+            >
+              {{ score.tooltip }}
+            </v-tooltip>
+          </BaseButton>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -50,23 +56,52 @@
 <script setup lang="ts">
 import BaseButton from './BaseButton.vue';
 
-import { ref, computed, type PropType } from 'vue';
 import type { Card } from '@/types/interfaces';
+
+import { ref, computed, type PropType } from 'vue';
+import { useStore } from 'vuex';
 import { useDisplay } from 'vuetify';
 import { useMarkdownIt } from '@/plugins/markdownit';
+import { useRoute } from 'vue-router';
 
 import { SCORES } from '@/constants';
+import type { MyStore } from '@/store/types';
+import { MutationTypes } from '@/store/mutations';
+
+import type { SuperMemoGrade } from 'supermemo';
+import { practice } from '@/utils/supermemo';
 
 const showBack = ref(false);
 const submitted = ref(false);
 
-const submit = () => {
+const store: MyStore = useStore();
+const learnsets = computed(() => store.state.learnsets);
+const route = useRoute();
+const { id: learnsetId } = route.params;
+
+const submit = (score: number) => {
+  const reviewCard = practice(prop.card, score as SuperMemoGrade);
+
+  const learnsetIdx = learnsets.value.findIndex(
+    (learnset) => learnset.id === learnsetId
+  );
+  const cardIdx = learnsets.value[learnsetIdx].cards.findIndex(
+    (card) => card.id === prop.card.id
+  );
+
+  learnsets.value[learnsetIdx].cards[cardIdx] = reviewCard;
+
+  store.commit(MutationTypes.SET_LEARNSETS, learnsets.value);
   submitted.value = true;
 };
 
 const prop = defineProps({
   card: {
     type: Object as PropType<Card>,
+    required: true,
+  },
+  review: {
+    type: Boolean,
     required: true,
   },
 });
