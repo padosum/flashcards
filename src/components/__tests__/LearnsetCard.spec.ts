@@ -1,6 +1,11 @@
 import LearnsetCard from '@/components/LearnsetCard.vue';
 import type { Card } from '@/types/interfaces';
-import { fireEvent, render } from '@testing-library/vue';
+import {
+  findAllByTestId,
+  fireEvent,
+  render,
+  waitFor,
+} from '@testing-library/vue';
 import vuetify from '@/utils/setupVuetify';
 import markdownit from 'markdown-it';
 import { markdownItPlugin } from '@/plugins/markdownit';
@@ -50,6 +55,7 @@ describe('LearnsetCard Component', () => {
         },
         props: {
           card: CARD_DATA,
+          review: true,
         },
         data() {
           return {
@@ -71,13 +77,60 @@ describe('LearnsetCard Component', () => {
     scoreButtons.forEach(({ name }) => {
       expect(scores.includes(Number(name))).toBeTruthy();
     });
+  });
 
-    it('점수를 매길 수 있는 버튼을 클릭하면 더 이상 버튼을 클릭할 수 없다.', async () => {
-      await fireEvent.click(getByRole('button', { name: '5' }));
+  it('점수를 매길 수 있는 버튼을 클릭하면 더 이상 버튼을 클릭할 수 없다.', async () => {
+    const { queryByRole, getAllByRole, getByRole, getByTestId } = render(
+      LearnsetCard,
+      {
+        global: {
+          plugins: [router, vuetify, markdownItPlugin],
+        },
+        props: {
+          card: CARD_DATA,
+          review: true,
+        },
+        data() {
+          return {
+            showBack: false,
+            submitted: false,
+          };
+        },
+      }
+    );
+
+    await fireEvent.click(getByTestId('show-answer-btn'));
+
+    await fireEvent.click(getByRole('button', { name: '5' }));
+
+    waitFor(() => {
+      const scoreButtons: HTMLButtonElement[] = getAllByRole('button', {
+        name: /^[0-9]$/,
+      });
 
       scoreButtons.forEach((button) => {
         expect(button).toBeDisabled();
       });
     });
+  });
+
+  it('리뷰가 필요하지 않는 항목은 점수를 매길 수 없다.', () => {
+    const { queryByRole } = render(LearnsetCard, {
+      global: {
+        plugins: [router, vuetify, markdownItPlugin],
+      },
+      props: {
+        card: CARD_DATA,
+        review: false,
+      },
+      data() {
+        return {
+          showBack: false,
+          submitted: false,
+        };
+      },
+    });
+
+    expect(queryByRole('button', { name: '5' })).not.toBeInTheDocument();
   });
 });
