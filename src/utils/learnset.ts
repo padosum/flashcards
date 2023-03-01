@@ -2,21 +2,21 @@ import type Token from 'markdown-it/lib/token';
 import type { Card } from '@/types/interfaces';
 import { v4 as uuid } from 'uuid';
 
-const CARD_INITIAL_VALUE: Card = {
-  id: '',
-  front: [],
-  back: [],
-  title: '',
-  efactor: 2.5,
-  dueDate: '',
-  repetition: 0,
-  interval: 0,
-  reviewDate: '',
-};
-
 const getLearnsetFromTokens = (tokens: Token[]) => {
   const cards: Card[] = [];
-  const card: Card = CARD_INITIAL_VALUE;
+  const card: Card = {
+    id: '',
+    front: [],
+    back: [],
+    title: '',
+    efactor: 2.5,
+    dueDate: '',
+    repetition: 0,
+    interval: 0,
+    reviewDate: '',
+    correctCnt: 0,
+    incorrectCnt: 0,
+  };
 
   let front = true;
 

@@ -14,12 +14,21 @@
       rounded="lg"
       class="pa-4 text-center mx-auto"
     >
+      <v-banner
+        color="error"
+        icon="mdi-alert-box"
+        text="학습이 필요한 항목이 없습니다."
+        stacked
+        v-if="!cards"
+      >
+      </v-banner>
       <swiper
         :effect="'cards'"
         :grabCursor="true"
         :modules="modules"
         :navigation="true"
         class="mySwiper"
+        else
       >
         <swiper-slide v-for="card in learnset.cards" :key="card.id">
           <LearnsetCard :card="card" :review="showReviewCards" />
@@ -55,6 +64,10 @@ const store: MyStore = useStore();
 const {
   params: { id },
 } = route;
+
+const cards = computed(() => {
+  return learnset.value.cards.length > 0;
+});
 
 const learnset = computed(() => {
   if (showReviewCards.value) {

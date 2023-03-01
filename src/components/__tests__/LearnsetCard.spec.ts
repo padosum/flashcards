@@ -31,6 +31,8 @@ describe('LearnsetCard Component', () => {
     repetition: 0,
     interval: 0,
     reviewDate: '',
+    correctCnt: 0,
+    incorrectCnt: 0,
   };
 
   it('카드의 질문이 렌더링 된다.', () => {
@@ -47,24 +49,21 @@ describe('LearnsetCard Component', () => {
   });
 
   it('정답 확인 버튼을 클릭하면 카드의 정답과 점수를 매길 수 있는 버튼이 렌더링 된다.', async () => {
-    const { getByText, getAllByRole, getByRole, getByTestId } = render(
-      LearnsetCard,
-      {
-        global: {
-          plugins: [router, vuetify, markdownItPlugin],
-        },
-        props: {
-          card: CARD_DATA,
-          review: true,
-        },
-        data() {
-          return {
-            showBack: false,
-            submitted: false,
-          };
-        },
-      }
-    );
+    const { getByText, getAllByRole, getByTestId } = render(LearnsetCard, {
+      global: {
+        plugins: [router, vuetify, markdownItPlugin],
+      },
+      props: {
+        card: CARD_DATA,
+        review: true,
+      },
+      data() {
+        return {
+          showBack: false,
+          submitted: false,
+        };
+      },
+    });
     await fireEvent.click(getByTestId('show-answer-btn'));
 
     expect(getByText('반갑습니다')).toBeInTheDocument();
@@ -80,24 +79,21 @@ describe('LearnsetCard Component', () => {
   });
 
   it('점수를 매길 수 있는 버튼을 클릭하면 더 이상 버튼을 클릭할 수 없다.', async () => {
-    const { queryByRole, getAllByRole, getByRole, getByTestId } = render(
-      LearnsetCard,
-      {
-        global: {
-          plugins: [router, vuetify, markdownItPlugin],
-        },
-        props: {
-          card: CARD_DATA,
-          review: true,
-        },
-        data() {
-          return {
-            showBack: false,
-            submitted: false,
-          };
-        },
-      }
-    );
+    const { getAllByRole, getByRole, getByTestId } = render(LearnsetCard, {
+      global: {
+        plugins: [router, vuetify, markdownItPlugin],
+      },
+      props: {
+        card: CARD_DATA,
+        review: true,
+      },
+      data() {
+        return {
+          showBack: false,
+          submitted: false,
+        };
+      },
+    });
 
     await fireEvent.click(getByTestId('show-answer-btn'));
 
