@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="d-flex flex-column pa-4">
+  <v-container class="d-flex flex-column pa-4">
     <v-switch
       class="align-self-end"
       v-model="showReviewCards"
@@ -10,17 +10,12 @@
     ></v-switch>
     <v-sheet
       elevation="12"
-      :max-width="sheetSize"
+      :width="sheetSize"
       rounded="lg"
       class="pa-4 text-center mx-auto"
     >
-      <v-banner
-        color="error"
-        icon="mdi-alert-box"
-        text="학습이 필요한 항목이 없습니다."
-        stacked
-        v-if="!cards"
-      >
+      <v-banner color="error" icon="mdi-alert-box" stacked v-if="!cards">
+        <span class="text-h5">학습이 필요한 항목이 없습니다.</span>
       </v-banner>
 
       <swiper
@@ -36,7 +31,7 @@
         </swiper-slide>
       </swiper>
     </v-sheet>
-  </v-layout>
+  </v-container>
 </template>
 
 <script setup lang="ts">
@@ -86,7 +81,7 @@ const sheetSize = computed(() => {
     case 'sm':
       return '80%';
     default:
-      return '50%';
+      return '60%';
   }
 });
 </script>
@@ -107,6 +102,6 @@ h2 {
 }
 
 .swiper-slide {
-  background-color: #d1c4e9;
+  background-color: var(--bg-color);
 }
 </style>
