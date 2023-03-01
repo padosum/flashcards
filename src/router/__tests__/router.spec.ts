@@ -9,6 +9,7 @@ import { store } from '@/store';
 import type { Learnset } from '@/types/interfaces';
 import LearnsetView from '@/views/LearnsetView.vue';
 import LearnView from '@/views/LearnView.vue';
+import { chartjsPlugin } from '@/plugins/chartjs';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,7 +29,7 @@ describe('routing', () => {
     const storeInstance = createStore(store);
     const { getByTestId } = render(App, {
       global: {
-        plugins: [router, storeInstance, vuetify],
+        plugins: [chartjsPlugin, router, storeInstance, vuetify],
       },
     });
 
@@ -102,7 +103,7 @@ const renderVuexApp = (customStore: StoreOptions<RootState>) => {
 
   return render(App, {
     global: {
-      plugins: [router, mergedStoreInstance, vuetify],
+      plugins: [chartjsPlugin, router, mergedStoreInstance, vuetify],
     },
   });
 };

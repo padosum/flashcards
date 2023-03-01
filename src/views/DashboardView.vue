@@ -8,10 +8,10 @@
     </div>
   </v-container>
   <div class="d-flex flex-column w-100 align-center">
-    <h5 class="font-weight-thin mb-2">
+    <p class="font-h5 font-weight-thin mt-6 mb-4">
       아래 버튼을 클릭해 카드 뭉치를 추가하거나 목록에서 카드 뭉치를 선택해
       학습을 시작하세요.
-    </h5>
+    </p>
     <BaseButton text="카드 뭉치 추가하기" @click="importLearnset" />
     <AddLearnsetModal
       :learnset-title="mdFile.name"
@@ -23,6 +23,7 @@
     <v-divider></v-divider>
     <v-container>
       <v-sheet class="pa-6 mx-auto" max-width="1000">
+        <LearnsetChart />
         <LearnsetList v-if="learnsets" :learnsets="learnsets" />
       </v-sheet>
     </v-container>
@@ -36,6 +37,7 @@ import type { File } from '@/types/interfaces';
 import BaseButton from '@/components/BaseButton.vue';
 import AddLearnsetModal from '@/components/AddLearnsetModal.vue';
 import LearnsetList from '@/components/LearnsetList.vue';
+import LearnsetChart from '@/components/LearnsetChart.vue';
 
 import { ref, reactive } from 'vue';
 
@@ -99,6 +101,6 @@ const addLearnset = (name: string) => {
 <style scoped>
 .container {
   height: 300px;
-  background-color: #d1c4e9;
+  background-color: var(--bg-color);
 }
 </style>
