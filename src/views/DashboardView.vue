@@ -19,6 +19,7 @@
       ref="modal"
       @add-learnset="addLearnset"
     />
+
     <v-divider></v-divider>
     <v-container>
       <v-sheet class="pa-6 mx-auto" max-width="1000">
