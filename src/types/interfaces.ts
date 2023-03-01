@@ -22,6 +22,8 @@ interface Card {
   repetition: number;
   interval: number;
   reviewDate: string;
+  correctCnt: number;
+  incorrectCnt: number;
 }
 
 export type { File, Card, Learnset };

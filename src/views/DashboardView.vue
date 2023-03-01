@@ -14,16 +14,20 @@
 
 <script setup lang="ts">
 import fileDialog from 'file-dialog';
+import type { File } from '@/types/interfaces';
 
 import BaseButton from '@/components/BaseButton.vue';
 import AddLearnsetModal from '@/components/AddLearnsetModal.vue';
 
 import { ref, reactive } from 'vue';
-import type { File } from '@/types/interfaces';
+
 import { getLearnsetFromTokens } from '@/utils/learnset';
+
 import { useStore } from 'vuex';
 import { MutationTypes } from '@/store/mutations';
 import { useMarkdownIt } from '@/plugins/markdownit';
+
+import { useRouter } from 'vue-router';
 
 const store = useStore();
 
@@ -60,11 +64,14 @@ const openDialog = async (): Promise<File> => {
   });
 };
 
+const router = useRouter();
+
 const addLearnset = (name: string) => {
   const tokens = md.parse(mdFile.contents as string, {});
   const { cards, id, created } = getLearnsetFromTokens(tokens);
 
-  store.commit(MutationTypes.ADD_LEARNSETS, { cards, id, created, name });
+  router.push(`/learnset/${id}`);
+  store.commit(MutationTypes.ADD_LEARNSET, { cards, id, created, name });
 };
 </script>
 

@@ -15,6 +15,13 @@
         </v-container>
       </v-card-text>
       <v-card-actions>
+        <BaseButton
+          text="진행 상태 초기화"
+          color="error"
+          variant="text"
+          data-testid="close"
+          @click="resetLearnset"
+        />
         <v-spacer></v-spacer>
         <BaseButton
           text="취소"
@@ -24,11 +31,11 @@
           @click="open = false"
         />
         <BaseButton
-          text="추가"
+          text="수정"
           color="primary"
           variant="text"
           data-testid="save"
-          @click="addLearnset"
+          @click="editLearnset"
         />
       </v-card-actions>
     </v-card>
@@ -44,7 +51,7 @@ import { useDisplay } from 'vuetify';
 import useModal from '@/hooks/useModal';
 const { open, toggleModal } = useModal();
 
-const emit = defineEmits(['addLearnset']);
+const emit = defineEmits(['editLearnset', 'resetLearnset']);
 
 const props = defineProps({
   title: {
@@ -59,9 +66,18 @@ const props = defineProps({
 const learnsetTitle = ref('');
 watchEffect(() => (learnsetTitle.value = props.learnsetTitle));
 
-const addLearnset = () => {
+const resetLearnset = () => {
+  const reset = confirm('이 카드 뭉치의 학습 진행 상태를 초기화하시겠습니까?');
+  if (reset) {
+    open.value = false;
+    emit('resetLearnset');
+  }
+  return;
+};
+
+const editLearnset = () => {
   open.value = false;
-  emit('addLearnset', learnsetTitle.value);
+  emit('editLearnset', learnsetTitle.value);
 };
 
 const { name } = useDisplay();
