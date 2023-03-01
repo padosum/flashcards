@@ -74,3 +74,35 @@ describe('DELETE_LEARNSET', () => {
     });
   });
 });
+
+describe('UPDATE_LEARNSET', () => {
+  it(`update learnset from the state`, () => {
+    const LEARNSET_1 = {
+      id: '1',
+      name: '',
+      created: 0,
+      cards: [],
+    };
+    const LEARNSET_2 = {
+      id: '2',
+      name: '',
+      created: 0,
+      cards: [],
+    };
+
+    const learnsets = [LEARNSET_1, LEARNSET_2];
+
+    const state = {
+      learnsets,
+    };
+
+    const name = 'newName';
+    const updatedLearnset = {
+      ...LEARNSET_1,
+      name,
+    };
+    mutations.UPDATE_LEARNSET(state, updatedLearnset);
+
+    expect(state.learnsets[0].name).toEqual(name);
+  });
+});

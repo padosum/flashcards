@@ -9,6 +9,7 @@ export enum MutationTypes {
   SET_LEARNSETS = 'SET_LEARNSETS',
   ADD_LEARNSET = 'ADD_LEARNSET',
   DELETE_LEARNSET = 'DELETE_LEARNSET',
+  UPDATE_LEARNSET = 'UPDATE_LEARNSET',
 }
 
 export const mutations = {
@@ -25,6 +26,12 @@ export const mutations = {
       state.learnsets.findIndex((l) => l.id === learnset.id),
       1
     );
+    storage.value = state.learnsets;
+  },
+  [MutationTypes.UPDATE_LEARNSET](state: RootState, learnset: Learnset) {
+    state.learnsets[state.learnsets.findIndex((l) => l.id === learnset.id)] =
+      learnset;
+
     storage.value = state.learnsets;
   },
 };
