@@ -16,6 +16,7 @@ const practice = (flashcard: Card, grade: SuperMemoGrade): Card => {
   ).toISOString();
 
   const CORRECT = grade >= 3;
+
   return {
     ...flashcard,
     reviewDate: now.toISOString(),

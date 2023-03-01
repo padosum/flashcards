@@ -22,6 +22,7 @@
         v-if="!cards"
       >
       </v-banner>
+
       <swiper
         :effect="'cards'"
         :grabCursor="true"

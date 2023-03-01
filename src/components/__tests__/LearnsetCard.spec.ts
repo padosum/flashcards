@@ -49,6 +49,7 @@ describe('LearnsetCard Component', () => {
   });
 
   it('정답 확인 버튼을 클릭하면 카드의 정답과 점수를 매길 수 있는 버튼이 렌더링 된다.', async () => {
+
     const { getByText, getAllByRole, getByTestId } = render(LearnsetCard, {
       global: {
         plugins: [router, vuetify, markdownItPlugin],
@@ -64,6 +65,7 @@ describe('LearnsetCard Component', () => {
         };
       },
     });
+
     await fireEvent.click(getByTestId('show-answer-btn'));
 
     expect(getByText('반갑습니다')).toBeInTheDocument();
