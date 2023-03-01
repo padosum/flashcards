@@ -7,7 +7,8 @@ const storage: Ref<Learnset[]> = useStorage('learnsets', []);
 
 export enum MutationTypes {
   SET_LEARNSETS = 'SET_LEARNSETS',
-  ADD_LEARNSETS = 'ADD_LEARNSETS',
+  ADD_LEARNSET = 'ADD_LEARNSET',
+  DELETE_LEARNSET = 'DELETE_LEARNSET',
 }
 
 export const mutations = {
@@ -15,8 +16,15 @@ export const mutations = {
     state.learnsets = learnsets;
     storage.value = state.learnsets;
   },
-  [MutationTypes.ADD_LEARNSETS](state: RootState, learnsets: Learnset) {
-    state.learnsets.push(learnsets);
+  [MutationTypes.ADD_LEARNSET](state: RootState, learnset: Learnset) {
+    state.learnsets.push(learnset);
+    storage.value = state.learnsets;
+  },
+  [MutationTypes.DELETE_LEARNSET](state: RootState, learnset: Learnset) {
+    state.learnsets.splice(
+      state.learnsets.findIndex((l) => l.id === learnset.id),
+      1
+    );
     storage.value = state.learnsets;
   },
 };

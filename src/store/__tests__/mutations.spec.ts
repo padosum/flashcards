@@ -40,8 +40,37 @@ describe('ADD_LEARNSET', () => {
       learnsets: [],
     };
 
-    mutations.ADD_LEARNSETS(state, learnset);
+    mutations.ADD_LEARNSET(state, learnset);
 
     expect(state).toEqual({ learnsets: [learnset] });
+  });
+});
+
+describe('DELETE_LEARNSET', () => {
+  it(`delete learnset from the state`, () => {
+    const LEARNSET_1 = {
+      id: '1',
+      name: '',
+      created: 0,
+      cards: [],
+    };
+    const LEARNSET_2 = {
+      id: '2',
+      name: '',
+      created: 0,
+      cards: [],
+    };
+
+    const learnsets = [LEARNSET_1, LEARNSET_2];
+
+    const state = {
+      learnsets,
+    };
+
+    mutations.DELETE_LEARNSET(state, LEARNSET_1);
+
+    expect(state).toEqual({
+      learnsets: [LEARNSET_2],
+    });
   });
 });
