@@ -38,6 +38,8 @@ describe('getters', () => {
       repetition: 0,
       interval: 0,
       reviewDate: '',
+      correctCnt: 0,
+      incorrectCnt: 0,
     };
 
     const CARD2 = {
@@ -50,6 +52,8 @@ describe('getters', () => {
       repetition: 0,
       interval: 0,
       reviewDate: '',
+      correctCnt: 0,
+      incorrectCnt: 0,
     };
 
     const learnsets: Learnset[] = [
