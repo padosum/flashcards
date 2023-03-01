@@ -12,7 +12,13 @@
       <v-spacer></v-spacer>
 
       <teamplte v-if="route.name === 'LearnsetView'">
-        <BaseButton text="" icon data-testid="edit" variant="default">
+        <BaseButton
+          text=""
+          icon
+          data-testid="edit"
+          variant="default"
+          @click="toggleModal"
+        >
           <v-icon>mdi-pencil</v-icon>
         </BaseButton>
 
@@ -25,6 +31,13 @@
         >
           <v-icon>mdi-delete</v-icon>
         </BaseButton>
+        <EditLearnsetModal
+          :learnset-title="pageTitle"
+          title="카드 뭉치 이름 수정하기"
+          ref="modal"
+          @edit-learnset="editLearnset"
+          @reset-learnset="resetLearnset"
+        />
       </teamplte>
     </v-app-bar>
     <v-main>
@@ -36,6 +49,7 @@
 <script setup lang="ts">
 import NavigationDrawer from '@/components/NavigationDrawer.vue';
 import BaseButton from '@/components/BaseButton.vue';
+import EditLearnsetModal from '@/components/EditLearnsetModal.vue';
 
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -73,6 +87,25 @@ const deleteLearnset = () => {
     store.commit(MutationTypes.DELETE_LEARNSET, learnset.value);
   }
   return;
+};
+
+const modal = ref<InstanceType<typeof EditLearnsetModal> | null>(null);
+
+const toggleModal = () => {
+  modal.value?.toggleModal();
+};
+
+const editLearnset = (newTitle: string) => {
+  if (learnset.value) {
+    learnset.value.name = newTitle;
+    store.commit(MutationTypes.UPDATE_LEARNSET, learnset.value);
+  }
+};
+
+const resetLearnset = () => {
+  if (learnset.value) {
+    store.commit(MutationTypes.RESET_LEARNSET, learnset.value.id);
+  }
 };
 </script>
 
