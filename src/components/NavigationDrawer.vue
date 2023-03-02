@@ -1,5 +1,12 @@
 <template>
-  <div class="text-h4 font-weight-black text-center py-5">FlashMD</div>
+  <div
+    class="d-flex justify-center align-center text-h4 font-weight-black py-5"
+  >
+    <span class="logo d-flex mr-2">
+      <LogoSvg />
+    </span>
+    FlashMD
+  </div>
 
   <v-list>
     <v-list-item to="/" exact>
@@ -24,6 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import LogoSvg from '@/components/LogoSvg.vue';
+
 import type { MyStore } from '@/store/types';
 import { useStore } from 'vuex';
 
