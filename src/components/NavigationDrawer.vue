@@ -1,11 +1,11 @@
 <template>
   <div
-    class="d-flex justify-center align-center text-h4 font-weight-black py-5"
+    class="d-flex justify-center align-center text-h5 font-weight-black py-5"
   >
     <span class="logo d-flex mr-2">
       <LogoSvg />
     </span>
-    FlashMD
+    FlashCards
   </div>
 
   <v-list>
