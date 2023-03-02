@@ -66,7 +66,7 @@
     <v-divider></v-divider>
     <v-container>
       <v-sheet class="pa-6 mx-auto" max-width="1000px">
-        <LearnsetChart />
+        <LearnsetChart v-if="learnsets.length" />
         <LearnsetList v-if="learnsets" :learnsets="learnsets" />
       </v-sheet>
     </v-container>
