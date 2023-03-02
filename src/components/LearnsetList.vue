@@ -10,13 +10,14 @@
         </div>
       </v-card-item>
       <v-card-text>
-        <v-list lines="two">
+        <v-list lines="two" role="list">
           <v-list-item
             v-for="learnset in learnsets"
             :key="learnset.id"
             :title="learnset.name"
             active-color="primary"
             @click="moveLearnset(learnset.id)"
+            role="listitem"
           >
             <template v-slot:append>
               <BaseButton
@@ -24,6 +25,7 @@
                 color="grey-lighten-1"
                 variant="text"
                 @click.stop="deleteLearnset({ id: learnset.id })"
+                :aria-label="`${learnset.name} 삭제하기`"
               >
                 <v-icon icon="mdi-delete"></v-icon>
               </BaseButton>

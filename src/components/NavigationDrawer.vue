@@ -8,7 +8,7 @@
     FlashCards
   </div>
 
-  <v-list>
+  <v-list role="navigation">
     <v-list-item to="/" exact>
       <template v-slot:prepend>
         <v-icon icon="mdi-view-dashboard"></v-icon>
@@ -16,7 +16,7 @@
       <v-list-item-title> Dashboard</v-list-item-title>
     </v-list-item>
     <v-list-subheader>카드 뭉치 목록</v-list-subheader>
-    <v-list :lines="false" density="compact" nav>
+    <v-list :lines="false" density="compact" nav role="navigation">
       <v-list-item
         v-for="item in store.state.learnsets"
         :key="item.id"

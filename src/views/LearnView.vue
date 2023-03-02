@@ -1,13 +1,14 @@
 <template>
   <v-container class="d-flex flex-column pa-4">
     <v-switch
-      class="align-self-end"
-      v-model="showReviewCards"
+      class="align-self-end text-high-emphasis" 
       label="학습이 필요한 항목만 보기"
+      v-model="showReviewCards"
       color="primary"
       :value="true"
       hide-details
-    ></v-switch>
+    >
+  </v-switch>
     <v-sheet
       elevation="12"
       :width="sheetSize"

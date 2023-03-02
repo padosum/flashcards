@@ -4,7 +4,7 @@
       <NavigationDrawer />
     </v-navigation-drawer>
     <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer" aria-label="toggle drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <div data-testid="toolbar-title">{{ pageTitle }}</div>
       </v-toolbar-title>

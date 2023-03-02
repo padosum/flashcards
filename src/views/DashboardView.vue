@@ -2,9 +2,9 @@
   <v-container class="container mb-10 text-white">
     <div class="d-flex flex-column fill-height justify-center align-center">
       <h1 class="text-h4 font-weight-black mb-4">FlashCards</h1>
-      <h4 class="subheading">
+      <h2 class="text-h6">
         Markdown으로 작성된 파일로 flash card를 만들어 학습해 보세요!
-      </h4>
+      </h2>
     </div>
   </v-container>
   <div class="d-flex flex-column align-center pa-4">
