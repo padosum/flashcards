@@ -92,7 +92,8 @@ const renderChart = () => {
         datasets: [
           {
             data: data.map((row) => row.count),
-            backgroundColor: ['#d1c4e9', '#242424'],
+            backgroundColor: ['#673ab7', '#242424'],
+
           },
         ],
       },

@@ -9,4 +9,7 @@ const SCORES = [
 
 const TIME_ZONE = 9 * 60 * 60 * 1000;
 
-export { SCORES, TIME_ZONE };
+const SAMPLE_TEXT =
+  '## 문제 1\n\n답변 내용입니다.\n\n## 문제 2\n\n- 답변 내용입니다.\n- 답변 내용입니다.';
+
+export { SCORES, TIME_ZONE, SAMPLE_TEXT };
