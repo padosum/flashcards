@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+/// <reference types="vite-svg-loader" />
 import Logo from '@/assets/logo.svg?raw';
 
 import type { MyStore } from '@/store/types';
