@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import fileDialog from 'file-dialog';
 import type { File } from '@/types/interfaces';
 
 import BaseButton from '@/components/BaseButton.vue';
@@ -39,13 +38,15 @@ import AddLearnsetModal from '@/components/AddLearnsetModal.vue';
 import LearnsetList from '@/components/LearnsetList.vue';
 import LearnsetChart from '@/components/LearnsetChart.vue';
 
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 
 import { getLearnsetFromTokens } from '@/utils/learnset';
 
 import { useStore } from 'vuex';
 import { MutationTypes } from '@/store/mutations';
 import { useMarkdownIt } from '@/plugins/markdownit';
+
+import { useFileDialog } from '@vueuse/core';
 
 import { useRouter } from 'vue-router';
 import type { MyStore } from '@/store/types';
@@ -63,29 +64,22 @@ const mdFile: File = reactive({
 
 const modal = ref<InstanceType<typeof AddLearnsetModal> | null>(null);
 
-const importLearnset = async () => {
-  const { name, contents } = await openDialog();
-  mdFile.name = name;
-  mdFile.contents = contents;
+const { files, open, reset } = useFileDialog({
+  multiple: false,
+  accept: '.md,.markdown',
+});
 
-  modal.value?.toggleModal();
+const importLearnset = () => {
+  open();
 };
 
-const openDialog = async (): Promise<File> => {
-  const [file] = await fileDialog({ accept: '.md,.markdown' });
-
-  return new Promise((resolve, reject) => {
-    if (!file) reject(new Error('No file selected'));
-    const reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = () =>
-      resolve({
-        name: file.name.replace(/\.[^/.]+$/, ''),
-        contents: reader.result?.toString(),
-      });
-    reader.onerror = () => reject(new Error('No file selected'));
-  });
-};
+watch(files, async () => {
+  if (files.value) {
+    mdFile.name = files.value[0].name.replace(/\.[^/.]+$/, '');
+    mdFile.contents = await files.value[0].text();
+    modal.value?.toggleModal();
+  }
+});
 
 const router = useRouter();
 
