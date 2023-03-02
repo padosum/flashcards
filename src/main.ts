@@ -3,14 +3,17 @@ import App from './App.vue';
 import router from './router';
 import '@/assets/style.scss';
 import 'vuetify/styles';
-import '@mdi/font/css/materialdesignicons.css';
-import vuetify from '@/utils/setupVuetify';
+import '@mdi/font/css/materialdesignicons.css'
+
+import { createVuetify } from 'vuetify';
 import { markdownItPlugin } from '@/plugins/markdownit';
 import { chartjsPlugin } from './plugins/chartjs';
 import { createStore } from 'vuex';
 import { store } from '@/store';
 
 const vuexStore = createStore(store);
+
+const vuetify = createVuetify({});
 
 const app = createApp(App);
 app.use(vuexStore);
