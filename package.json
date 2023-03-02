@@ -20,6 +20,7 @@
     "supermemo": "^2.0.17",
     "swiper": "^9.0.5",
     "uuidv4": "^6.2.13",
+    "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuetify": "^3.1.6",
