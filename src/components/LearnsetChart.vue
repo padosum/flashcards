@@ -93,6 +93,7 @@ const renderChart = () => {
           {
             data: data.map((row) => row.count),
             backgroundColor: ['#673ab7', '#242424'],
+
           },
         ],
       },

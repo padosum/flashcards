@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex flex-column pa-3 w-100 card">
+
     <h2 class="text-h6 font-weight-black">{{ card.title }}</h2>
     <v-textarea
       label="내 답변"
