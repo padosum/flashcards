@@ -2,7 +2,9 @@
   <div
     class="d-flex justify-center align-center text-h4 font-weight-black py-5"
   >
-    <span class="logo d-flex mr-2" v-html="Logo"></span>
+    <span class="logo d-flex mr-2">
+      <LogoSvg />
+    </span>
     FlashMD
   </div>
 
@@ -29,8 +31,7 @@
 </template>
 
 <script setup lang="ts">
-/// <reference types="vite-svg-loader" />
-import Logo from '@/assets/logo.svg?raw';
+import LogoSvg from '@/components/LogoSvg.vue';
 
 import type { MyStore } from '@/store/types';
 import { useStore } from 'vuex';
