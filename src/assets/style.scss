@@ -3,6 +3,7 @@
 
 :root {
   --bg-color: #d1c4e9;
+  --bg-color-dark: #673ab7;
   --swiper-navigation-sides-offset: -60px;
   --swiper-navigation-size: 32px; /* To edit the size of the arrows */
   --swiper-navigation-color: #4527a0; /* To edit the color of the arrows */
@@ -10,7 +11,7 @@
 
 a {
   text-decoration: none;
-  color: #673ab7;
+  color: var(--bg-color-dark);
   transition: 0.4s;
 }
 

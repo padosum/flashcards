@@ -1,8 +1,14 @@
 <template>
-  <div class="pa-10">
-    <LearnsetChart :learnset-id="route.params.id as string" />
-    <BaseButton text="학습 시작하기" :to="`/learn/${route.params.id}`" />
-  </div>
+  <v-container class="d-flex justify-center align-center">
+    <v-sheet class="pa-6" min-width="50%">
+      <LearnsetChart :learnset-id="route.params.id as string" />
+      <BaseButton
+        color="primary"
+        text="학습 시작하기"
+        :to="`/learn/${route.params.id}`"
+      />
+    </v-sheet>
+  </v-container>
 </template>
 
 <script setup lang="ts">
