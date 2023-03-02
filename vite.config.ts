@@ -12,16 +12,6 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'group-router': [
-            './src/views/DashboardView.vue',
-            './src/views/LearnsetView.vue',
-            './src/views/LearnView.vue',
-          ],
-        },
-      },
-    },
-  },
+    sourcemap: true
+  }
 });

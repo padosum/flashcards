@@ -7,11 +7,19 @@ import { createRouter, createWebHistory } from 'vue-router';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: DashboardView, name: 'Dashboard' },
-    { path: '/learnset/:id', component: LearnsetView, name: 'LearnsetView' },
+    {
+      path: '/',
+      component: () => import('@/views/DashboardView.vue'),
+      name: 'Dashboard',
+    },
+    {
+      path: '/learnset/:id',
+      component: () => import('@/views/LearnsetView.vue'),
+      name: 'LearnsetView',
+    },
     {
       path: '/learn/:id',
-      component: LearnView,
+      component: () => import('@/views/LearnView.vue'),
       name: 'Learn',
     },
   ],
