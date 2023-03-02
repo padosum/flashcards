@@ -11,4 +11,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'group-router': [
+            './src/views/DashboardView.vue',
+            './src/views/LearnsetView.vue',
+            './src/views/LearnView.vue',
+          ],
+        },
+      },
+    },
+  },
 });
